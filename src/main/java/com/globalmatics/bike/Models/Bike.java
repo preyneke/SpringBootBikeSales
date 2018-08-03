@@ -1,5 +1,7 @@
 package com.globalmatics.bike.Models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.boot.autoconfigure.web.ResourceProperties;
 
 import javax.persistence.Entity;
@@ -10,6 +12,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Bike {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -20,6 +23,8 @@ public class Bike {
     private String model;
     private String serialNumber;
     private BigDecimal purchasePrice;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private Date purchaseDate;
     private boolean contact;
 
